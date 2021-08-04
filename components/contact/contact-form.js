@@ -1,14 +1,24 @@
 import axios from 'axios';
 import classes from './contact-form.module.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
+import NotificationContext from '../../store/notification-context';
 
 const ContactForm = () => {
+  const notificationCxt = useContext(NotificationContext);
+  const { showNotification, notification } = notificationCxt;
+
   const emailRef = useRef();
   const nameRef = useRef();
   const messageRef = useRef();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    showNotification({
+      status: 'pending',
+      title: 'Sending message...',
+      message: 'Your message is on its way!',
+    });
 
     const reqHeaders = {
       headers: {
@@ -22,7 +32,22 @@ const ContactForm = () => {
       message: messageRef.current.value,
     };
 
-    await axios.post('/api/contact', reqBody, reqHeaders);
+    try {
+      const {
+        data: { message },
+      } = await axios.post('/api/contact', reqBody, reqHeaders);
+      showNotification({
+        status: 'success',
+        title: 'Success!',
+        message: message,
+      });
+    } catch (err) {
+      showNotification({
+        status: 'error',
+        title: 'Message send failure',
+        message: 'Something went wrong, try again later',
+      });
+    }
   };
 
   return (

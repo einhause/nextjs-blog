@@ -41,7 +41,6 @@ async function handler(req, res) {
       resultObj = { message: errConnectDB.message };
     }
 
-    console.log(resultStatusCode, resultObj);
     return res.status(resultStatusCode).json(resultObj);
   }
 }
