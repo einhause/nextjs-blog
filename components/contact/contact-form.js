@@ -1,6 +1,6 @@
 import axios from 'axios';
 import classes from './contact-form.module.css';
-import { useState, useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import NotificationContext from '../../store/notification-context';
 
 const ContactForm = () => {

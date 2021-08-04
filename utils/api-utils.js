@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 async function connectDB() {
   try {
     const client = await MongoClient.connect(
-      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@blogcluster.gcbgt.mongodb.net/BlogDB?retryWrites=true&w=majority`
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTERNAME}.gcbgt.mongodb.net/${process.env.DB_DATABASE}?retryWrites=true&w=majority`
     );
     const db = client.db();
     return [{ client, db }];
