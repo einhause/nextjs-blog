@@ -1,6 +1,7 @@
 import Hero from '../components/home-page/hero';
 import FeaturedPosts from '../components/home-page/featured-posts';
 import { getFeaturedPosts } from '../utils/posts-util';
+import Head from 'next/head';
 
 // const TEST_POSTS = [
 //   {
@@ -40,6 +41,13 @@ import { getFeaturedPosts } from '../utils/posts-util';
 const HomePage = (props) => {
   return (
     <>
+      <Head>
+        <title>Eric's Blog</title>
+        <meta
+          name='description'
+          content='I am an aspiring web developer, specializing in React and Next.js'
+        />
+      </Head>
       <Hero />
       <FeaturedPosts posts={props.posts} />
     </>

@@ -1,5 +1,6 @@
 import AllPosts from '../../components/posts/all-posts';
 import { getAllPosts } from '../../utils/posts-util';
+import Head from 'next/head';
 
 // const TEST_POSTS = [
 //   {
@@ -37,7 +38,18 @@ import { getAllPosts } from '../../utils/posts-util';
 // ];
 
 const PostsPage = (props) => {
-  return <AllPosts posts={props.posts} />;
+  return (
+    <>
+      <Head>
+        <title>All of my Posts</title>
+        <meta
+          name='description'
+          content='All of my posts about different technologies'
+        />
+      </Head>
+      <AllPosts posts={props.posts} />
+    </>
+  );
 };
 
 export function getStaticProps() {
